@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import TextInputWithLabel from '../componets/TextInputWithLabel'
 import IconButton from '../componets/IconButton'
 import Icon from 'react-native-vector-icons/Ionicons'
+import TextButton from '../componets/TextButton'
 
-const LoginScreen = () => {
+
+const LoginScreen = ({ navigation }: any) => {
 
   const [eMail, setEMail] = useState("")
   const [password, setPassword] = useState("")
@@ -39,7 +41,7 @@ const LoginScreen = () => {
       <IconButton
         style={{ marginTop: 8 }}
         variant="Right"
-        text='Giriş'
+        text='Giriş Yap'
         textProps={{ style: { fontSize: 20 } }}
         iconProps={{
           name: "log-in",
@@ -48,6 +50,30 @@ const LoginScreen = () => {
         }}
         onPress={() => {
           console.log(eMail + "-" + password)
+        }}
+      />
+      <IconButton
+        style={{ marginTop: 8 }}
+        variant="Right"
+        text='Kaydol'
+        textProps={{ style: { fontSize: 20 } }}
+        iconProps={{
+          name: "person-add",
+          size: 25,
+          color: "green"
+        }}
+        onPress={() => {
+         
+          navigation.navigate("Signup")
+
+        }}
+      />
+      <TextButton
+      style={{marginTop:8}}
+        textProps={{ style: { fontSize: 20, color: "gray" } }}
+        title='Şifremi Unuttum'
+        onPress={() => {
+          navigation.navigate("ForgotPassword")
         }}
       />
 

@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import Icon from "react-native-vector-icons/Ionicons"
+import HomeScreen from '../screens/HomeScreen'
 
 const Pages = () => {
     const Tab=createBottomTabNavigator()
@@ -18,13 +19,13 @@ const Pages = () => {
 
 
           if (route.name === "Login") {
-            iconName = focused ? "chatbubbles" : "chatbubbles-outline";
+            iconName = focused ? "log-in" : "log-in-outline";
           }
           else if (route.name === "Signup") {
-            iconName = focused ? "home" : "home-outline";
+            iconName = focused ? "person-add" : "person-add-outline";
           }
           else if (route.name === "ForgotPassword") {
-            iconName = focused ? "person" : "person-outline";
+            iconName = focused ? "key" : "key-outline";
           }
 
 
@@ -40,8 +41,9 @@ const Pages = () => {
     }>
 
         <Tab.Screen name="Login" component={LoginScreen}/>
-        <Tab.Screen name='Signup' component={SignupScreen}/>
-        <Tab.Screen name='ForgotPassword' component={ForgotPasswordScreen}/>
+        <Tab.Screen name="Signup" component={SignupScreen}/>
+        <Tab.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
+        <Tab.Screen name="Home" component={HomeScreen}/>
         
     </Tab.Navigator>
    
