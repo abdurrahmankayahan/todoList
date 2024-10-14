@@ -11,39 +11,92 @@ export enum priority {
     High = '#F44336',         // Kırmızı (Yüksek öncelik)
 }
 
-interface Props extends PressableProps{
+export const priorityList=[
+    {
+        title:"Low", 
+        value:'#4CAF50',
+    },         
+    {
+        title:"MediumLow", 
+        value:'#FFEB3B',
+    }, 
+    {
+        title:"Medium", 
+        value:'#FFC107',
+    },       
+    {
+        title:"MediumHigh", 
+        value:'#FF9800',
+    },  
+    {
+        title:"High", 
+        value:'#F44336',
+    },     
+]
 
+export enum status {
+    Redirected = "Yönlendirildi",
+    Waiting = "Bekliyor",
+    Paused = "Duraklatıldı",
+    InProgress = "Yapılıyor",
+    Completed = "Tamamlandı",
+}
+
+export const statusList = [
+    {
+        title: "Redirected",
+        value: "Yönlendirildi",
+    },
+    {
+        title: "Waiting",
+        value: "Bekliyor",
+    },
+    {
+        title: "Paused",
+        value: "Duraklatıldı",
+    },
+    {
+        title: "InProgress",
+        value: "Yapılıyor",
+    },
+    {
+        title: "Completed",
+        value: "Tamamlandı",
+    },
+];
+
+
+export type TodoType={
     title:string,
     tag:string,
     text:string,
-    status:"Yönlendirildi"|"Bekliyor"|"Duraklatıldı"|"Yapılıyor"|"Tamamlandı"|"",    
+    status:status    
     date:number
     priority:priority|string
+}
 
-
-
+interface Props extends PressableProps{
+todo:TodoType
 }
 
 
 const TodoItem:React.FC<Props> = (props) => {
     return (
         <Pressable {...props}
-        style={[styles.container,{backgroundColor:props.priority+"55"}]}
-        
-        >
+        style={[styles.container,{backgroundColor:props.todo.priority+"55"}]}   >
             <View style={{flex:1}}>
 
-            <View style={[styles.header,{backgroundColor:props.priority}]}>
-                <Text style={{ flex: 2, textAlign: "center", borderWidth: 1 }} >{props.title}</Text>
-                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }}>{props.tag}</Text>
+            <View style={[styles.header,{backgroundColor:props.todo.priority}]}>
+                <Text style={{ flex: 2, textAlign: "center", borderWidth: 1 }} >{props.todo.title}</Text>
+                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }}>{props.todo.tag}</Text>
             </View>
 
             <View style={styles.body}>
-                <Text style={{ flex: 1, textAlign: "center",  }} >{props.text}</Text>
+                <Text style={{ flex: 1, textAlign: "center",  }} >{props.todo.text}</Text>
             </View>
             <View style={styles.footer}>
-                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }} >{props.status}</Text>
-                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }}>{new Date(props.date).toDateString()}</Text>
+                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }} >{props.todo.status}</Text>
+                <Text style={{ flex: 1, textAlign: "center", borderWidth: 1 }}>{new Date(props.todo.date).toDateString()}</Text>
 
             </View>
                 

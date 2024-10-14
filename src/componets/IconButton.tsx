@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { IconProps } from 'react-native-vector-icons/Icon'
 
 interface props extends PressableProps {
-style:ViewStyle,
+style?:ViewStyle,
     variant?: "Left" | "Right" | "Top" | "Bottom",
     text: string,
     textProps?: TextProps,

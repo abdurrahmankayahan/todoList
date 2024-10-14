@@ -18,7 +18,7 @@ const TextInputWithLabel: React.FC<Props> = (customprops,) => {
     return (
         <View style={[styles.container,customprops.style]} >
             <IconTextLabel name={customprops.iconName!} size={customprops.iconSize} labelText={customprops.labelText} textLabelStyle={[styles.textLabelStyle,customprops.textLabelStyle!]} />
-            <TextInput {...customprops}
+            <TextInput {...customprops }
                 style={styles.textInputStyle}
             />
         </View>
@@ -29,7 +29,8 @@ export default TextInputWithLabel
 
 const styles = StyleSheet.create({
     container: {
-        width: "90%"
+        width: "90%",
+        alignSelf:"center"
     },
     textInputStyle: {
         fontSize: 25,

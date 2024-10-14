@@ -4,7 +4,11 @@ import TextInputWithLabel from '../componets/TextInputWithLabel'
 import IconButton from '../componets/IconButton'
 import Icon from 'react-native-vector-icons/Ionicons'
 import TextButton from '../componets/TextButton'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useUserstore from '../zustand/User'
 
+
+export const APIHostName = `http://localhost:${3000}`
 
 const LoginScreen = ({ navigation }: any) => {
 
@@ -50,6 +54,32 @@ const LoginScreen = ({ navigation }: any) => {
         }}
         onPress={() => {
           console.log(eMail + "-" + password)
+          console.log(JSON.stringify({ eMail, password }))
+
+
+          fetch(APIHostName + "/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ eMail, password }),
+          })
+            .then(val => val.json())
+            .then(async val => {
+              console.log(val)
+              val ? (
+                useUserstore.setState({id:val.id,name:val.name,eMail:val.eMail,password:val.password,auth:true}),
+                await AsyncStorage.setItem('User', JSON.stringify({ ...val, auth: true })),
+                console.log("Giriş Başarılı Hoşgeldiniz " + val.name)) : null
+            }
+
+
+
+
+            )
+
+
+
         }}
       />
       <IconButton
@@ -63,13 +93,13 @@ const LoginScreen = ({ navigation }: any) => {
           color: "green"
         }}
         onPress={() => {
-         
+
           navigation.navigate("Signup")
 
         }}
       />
       <TextButton
-      style={{marginTop:8}}
+        style={{ marginTop: 8 }}
         textProps={{ style: { fontSize: 20, color: "gray" } }}
         title='Şifremi Unuttum'
         onPress={() => {

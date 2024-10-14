@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import TextInputWithLabel from '../componets/TextInputWithLabel'
 import IconButton from '../componets/IconButton'
+import { APIHostName } from './LoginScreen'
 
 const ForgotPasswordScreen = () => {
   const [eMail, setEMail] = useState("")
   const [password, setPassword] = useState("")
 
   const [authCode, setAuthCode] = useState(false)
-  const [timeOut, setTimeOut] = useState(120)
+  const [timeOut, setTimeOut] = useState(10)
 
 
 
@@ -19,17 +20,17 @@ const ForgotPasswordScreen = () => {
     let timer: NodeJS.Timeout;
 
     if (authCode && timeOut > 0) {
-        timer = setInterval(() => {
-            setTimeOut(prev => prev - 1);
-        }, 1000);
+      timer = setInterval(() => {
+        setTimeOut(prev => prev - 1);
+      }, 1000);
     } else if (timeOut === 0) {
       setAuthCode(false)
-      setTimeOut(120)
+      setTimeOut(10)
     }
 
-    return () => clearInterval(timer); 
+    return () => clearInterval(timer);
 
-}, [authCode, timeOut]);
+  }, [authCode, timeOut]);
 
 
 
@@ -48,14 +49,14 @@ const ForgotPasswordScreen = () => {
         placeholder='E-Posta Giriniz..'
       />
 
-      {authCode?<TextInputWithLabel
+      {authCode ? <TextInputWithLabel
         style={{ marginVertical: 4 }}
         iconName='key'
         iconSize={30}
         labelText='Kod'
         onChangeText={setPassword}
-        placeholder={authCode ? "Kod Giriniz.."+timeOut.toString() : "Kod Giriniz.."}
-        secureTextEntry={true} />:null}
+        placeholder={authCode ? "Kod Giriniz.." + timeOut.toString() : "Kod Giriniz.."}
+        secureTextEntry={true} /> : null}
 
 
       <IconButton
@@ -69,8 +70,26 @@ const ForgotPasswordScreen = () => {
           color: "green"
         }}
         onPress={() => {
-          setAuthCode(true)
-          console.log("kod:" +authCode)
+          if (!authCode) {
+
+            setAuthCode(true)
+            fetch(APIHostName + "/authCode", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json"
+              },
+              body: JSON.stringify({ eMail, code: "123321" })
+            })
+
+          }
+          else {
+
+
+
+
+          }
+
+          console.log("kod:" + authCode)
         }}
       />
 

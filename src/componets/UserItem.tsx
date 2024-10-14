@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
 interface Props {
-
+    style:ViewStyle,
     title: string,
     text: string,
 
@@ -19,7 +19,7 @@ const UserItem: React.FC<Props> = (props) => {
     .join('');
     
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,props.style]}>
             <View style={styles.imageView}>
                 <Icon style={{position:"absolute"}} name="person" size={40} color={"#33333333"}/>
                 <Text style={{textAlign:"center", fontSize:25,}}>{initials}</Text>

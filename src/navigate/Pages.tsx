@@ -43,7 +43,6 @@ const Pages = () => {
         <Tab.Screen name="Login" component={LoginScreen}/>
         <Tab.Screen name="Signup" component={SignupScreen}/>
         <Tab.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Tab.Screen name="Home" component={HomeScreen}/>
         
     </Tab.Navigator>
    
